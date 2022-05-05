@@ -9,13 +9,23 @@ import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component'
+import { RegisterComponent } from './register/register.component';
+import { ItemListComponent } from './items/item-list/item-list.component';
+import { ItemDetailComponent } from './items/item-detail/item-detail.component';
+import { ListsComponent } from './items/lists/lists.component';
+import { CommentsComponent } from './items/comments/comments.component'
+import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './_modules/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ItemListComponent,
+    ItemDetailComponent,
+    ListsComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -23,9 +33,11 @@ import { RegisterComponent } from './register/register.component'
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    BsDropdownModule.forRoot()
+    SharedModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports: [
+    BsDropdownModule,
+    ToastrModule
+  ]
 })
 export class AppModule { }
