@@ -1,4 +1,5 @@
-﻿using GymSharkAPI.Entities;
+﻿using GymSharkApi.Entities;
+using GymSharkAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace GymSharkAPI.Data
         {
         }
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
