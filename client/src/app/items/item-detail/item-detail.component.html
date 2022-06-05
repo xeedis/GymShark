@@ -1,1 +1,42 @@
-<p>item-detail works!</p>
+<div class="row" *ngIf="item">
+    <div class="col-4">
+        <div class="card">
+            <img src="{{item.photoUrl || './assets/user.png'}}" alt="{{item.productName}}"
+            class="card-img-top img-thumbnail">
+            <div class="card-body">
+                <div>
+                    <strong>Name:</strong>
+                <p>{{item.productName}}</p>
+                </div>
+                <div>
+                    <strong>Price:</strong>
+                    <p>{{item.price}}</p>
+                </div>
+                <div>
+                    <strong>Category:</strong>
+                    <p>{{item.category}}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group d-flex">
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <tabset class="item-tabset">
+            <tab heading="About {{item.productName}}">
+                <h4>Description</h4>
+                <p>{{item.description}}</p>
+            </tab>
+            <tab heading="Photos">
+                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" 
+                style="display:inline-block; margin: bottom 20px;"></ngx-gallery>
+            </tab>
+            <tab heading="Opinions">
+                <p>Opinions will go here</p>
+            </tab>
+        </tabset>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from 'src/app/_models/item';
+import { ItemsService } from 'src/app/_services/items.service';
 
 @Component({
   selector: 'app-item-list',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-
-  constructor() { }
+  items: Item[];
+  constructor(private itemService: ItemsService) { }
 
   ngOnInit(): void {
+    this.loadItems();
+  }
+
+  loadItems(){
+    this.itemService.getItems().subscribe(items=>{
+      this.items=items;
+      console.log(this.items[0].photoUrl);
+    })
   }
 
 }

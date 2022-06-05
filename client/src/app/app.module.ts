@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import{ HttpClientModule } from '@angular/common/http';
+import{ HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,8 @@ import { ListsComponent } from './items/lists/lists.component';
 import { CommentsComponent } from './items/comments/comments.component'
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './_modules/shared.module';
+import { ItemCardComponent } from './items/item-card/item-card.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { SharedModule } from './_modules/shared.module';
     ItemListComponent,
     ItemDetailComponent,
     ListsComponent,
-    CommentsComponent
+    CommentsComponent,
+    ItemCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,12 @@ import { SharedModule } from './_modules/shared.module';
   exports: [
     BsDropdownModule,
     ToastrModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}
+  ],
+  bootstrap: [
+    AppComponent
   ]
 })
 export class AppModule { }

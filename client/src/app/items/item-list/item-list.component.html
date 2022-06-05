@@ -1,1 +1,5 @@
-<p>item-list works!</p>
+<div class="row">
+    <div *ngFor="let item of items" class="col-2">
+        <app-item-card [item]="item"></app-item-card>
+    </div>
+</div>
