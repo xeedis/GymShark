@@ -16,6 +16,7 @@ namespace GymSharkApi.Helpers
                 .ForMember(dest=>dest.PhotoUrl, 
                 opt=> opt.MapFrom(src=>src.Photos.FirstOrDefault(x=>x.isMain).Url));
             CreateMap<Photo, PhotoDto>();
+            CreateMap<ItemUpdateDto, Product>();
         }
     }
 }

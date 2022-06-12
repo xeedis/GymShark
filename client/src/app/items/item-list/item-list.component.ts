@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Item } from 'src/app/_models/item';
 import { ItemsService } from 'src/app/_services/items.service';
 
@@ -8,18 +9,11 @@ import { ItemsService } from 'src/app/_services/items.service';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  items: Item[];
+  items$: Observable<Item[]>;
   constructor(private itemService: ItemsService) { }
 
   ngOnInit(): void {
-    this.loadItems();
-  }
-
-  loadItems(){
-    this.itemService.getItems().subscribe(items=>{
-      this.items=items;
-      console.log(this.items[0].photoUrl);
-    })
+    this.items$ = this.itemService.getItems();
   }
 
 }

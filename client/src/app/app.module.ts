@@ -18,6 +18,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './_modules/shared.module';
 import { ItemCardComponent } from './items/item-card/item-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { ItemEditComponent } from './items/item-edit/item-edit.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +32,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     ListsComponent,
     CommentsComponent,
     ItemCardComponent,
+    ItemEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,14 +40,16 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgxSpinnerModule
   ],
   exports: [
     BsDropdownModule,
     ToastrModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi:true}
   ],
   bootstrap: [
     AppComponent

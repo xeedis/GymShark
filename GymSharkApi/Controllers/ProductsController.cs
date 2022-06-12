@@ -35,5 +35,18 @@ namespace GymSharkApi.Controllers
         {
             return await _productRepository.GetItemAsync(name);
         }
+
+        [HttpPut("{name}")]
+        public async Task<ActionResult<ItemUpdateDto>> UpdateUser(ItemUpdateDto itemUpdateDto, string name)
+        {
+            var product = await _productRepository.GetProductByName(name);
+
+            _mapper.Map(itemUpdateDto, product);
+
+            _productRepository.Update(product);
+
+            if (await _productRepository.SaveAllAsync()) return NoContent();
+            return BadRequest("Failed to update item!");
+        }
     }
 }
