@@ -37,7 +37,7 @@ namespace GymSharkApi.Controllers
         }
 
         [HttpPut("{name}")]
-        public async Task<ActionResult<ItemUpdateDto>> UpdateUser(ItemUpdateDto itemUpdateDto, string name)
+        public async Task<ActionResult<ItemUpdateDto>> UpdateProduct(ItemUpdateDto itemUpdateDto, string name)
         {
             var product = await _productRepository.GetProductByName(name);
 
@@ -47,6 +47,44 @@ namespace GymSharkApi.Controllers
 
             if (await _productRepository.SaveAllAsync()) return NoContent();
             return BadRequest("Failed to update item!");
+        }
+
+        [HttpPut("productName/set-main-photo/{photoId}")]
+        public async Task<ActionResult> SetMainPhoto(int photoId,string productName)
+        {
+            var product = await _productRepository.GetProductByName(productName);
+            var photo = product.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo.isMain) return BadRequest("This is already your main photo!");
+
+            var currentMain = product.Photos.FirstOrDefault(x => x.isMain);
+            if (currentMain != null) currentMain.isMain = false;
+            photo.isMain = true;
+
+            if(await _productRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to set as main photo");
+        }
+
+        [HttpDelete("productName/delete-photo/{photoId}")]
+        public async Task<ActionResult> DeletePhoto(int photoId,string productName)
+        {
+            var product = await _productRepository.GetProductByName(productName);
+            var photo = product.Photos.FirstOrDefault(x=>x.Id== photoId);
+
+            if (photo == null) return NotFound();
+            if (photo.isMain) return BadRequest("cannot delete main photo");
+            if(photo.PublicId != null)
+            {
+                /*var result = await _photoService.DeletPhotoAsync(photo.PublicId)
+                if(result.Error!=null) return BadRequest(result.Error.Message); */
+            }
+
+            product.Photos.Remove(photo);
+
+            if (await _productRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("Couldn`t delete photo");
         }
     }
 }
