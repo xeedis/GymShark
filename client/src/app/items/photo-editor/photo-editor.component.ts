@@ -5,6 +5,8 @@ import { AccountService } from 'src/app/_services/account.service';
 import { environment } from 'src/environments/environment';
 import { FileUploader } from 'ng2-file-upload';
 import { take } from 'rxjs/operators';
+import { ItemsService } from 'src/app/_services/items.service';
+import { Photo } from 'src/app/_models/photo';
 
 @Component({
   selector: 'app-photo-editor',
@@ -18,30 +20,29 @@ export class PhotoEditorComponent implements OnInit {
   baseUrl = environment.apiUrl;
   user: User;
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private itemService:ItemsService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user=>{
       this.user = user;
     })
    }
 
   ngOnInit(): void {
-    this.initializeUploader();
+    this.initializeUploader(this.item);
   }
 
   fileOverBase(e:any){
     this.hasBaseDropZoneOver = e;
   }
 
-  initializeUploader(){
+  initializeUploader(item: Item){
     this.uploader = new FileUploader({
-      url:this.baseUrl+ 'products/add-photo',
+      url:this.baseUrl+ 'products/'+item.productName+'/add-photo',
       authToken: 'Bearer'+this.user.token,
       isHTML5:true,
       allowedFileType:['image'],
       removeAfterUpload: true,
       autoUpload:false,
       maxFileSize:10*1024*1024
-
     });
 
     this.uploader.onAfterAddingFile = (file) => {
@@ -54,5 +55,21 @@ export class PhotoEditorComponent implements OnInit {
         this.item.photos.push(photo);
       }
     }
+  }
+
+  setMainPhoto(photo:Photo){
+    this.itemService.setMainPhoto(this.item.productName, photo.id).subscribe(()=>{
+      this.item.photoUrl = photo.url;
+      this.item.photos.forEach(p=>{
+        if(p.isMain) p.isMain = false;
+        if(p.id === photo.id) p.isMain = true;
+      })
+    })
+  }
+
+  deletePhoto(photoId:number){
+    this.itemService.deletePhoto(this.item.productName, photoId).subscribe(()=>{
+      this.item.photos = this.item.photos.filter(x=>x.id !== photoId);
+    })
   }
 }

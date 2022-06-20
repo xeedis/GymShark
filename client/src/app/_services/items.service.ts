@@ -38,4 +38,12 @@ export class ItemsService {
       })
     );
   }
+
+  setMainPhoto(productName:string, photoId:number){
+    return this.http.put(this.baseUrl + 'products/'+ productName + '/set-main-photo/'+photoId, {});
+  }
+
+  deletePhoto(productName:string, photoId:number){
+    return this.http.delete(this.baseUrl + 'products/' + productName + '/delete-photo/' + photoId);
+  }
 }

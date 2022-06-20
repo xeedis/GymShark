@@ -82,8 +82,8 @@ namespace GymSharkApi.Controllers
             return BadRequest("Problem with adding photo!");
         }
 
-        [HttpPut("productName/set-main-photo/{photoId}")]
-        public async Task<ActionResult> SetMainPhoto(int photoId,string productName)
+        [HttpPut("{productName}/set-main-photo/{photoId}")]
+        public async Task<ActionResult> SetMainPhoto(string productName,int photoId)
         {
             var product = await _productRepository.GetProductByName(productName);
             var photo = product.Photos.FirstOrDefault(x => x.Id == photoId);
@@ -99,8 +99,8 @@ namespace GymSharkApi.Controllers
             return BadRequest("Failed to set as main photo");
         }
 
-        [HttpDelete("productName/delete-photo/{photoId}")]
-        public async Task<ActionResult> DeletePhoto(int photoId,string productName)
+        [HttpDelete("{productName}/delete-photo/{photoId}")]
+        public async Task<ActionResult> DeletePhoto(string productName, int photoId)
         {
             var product = await _productRepository.GetProductByName(productName);
             var photo = product.Photos.FirstOrDefault(x=>x.Id== photoId);
@@ -109,8 +109,8 @@ namespace GymSharkApi.Controllers
             if (photo.isMain) return BadRequest("cannot delete main photo");
             if(photo.PublicId != null)
             {
-                /*var result = await _photoService.DeletPhotoAsync(photo.PublicId)
-                if(result.Error!=null) return BadRequest(result.Error.Message); */
+                var result = await _photoService.DeletePhotoAsync(photo.PublicId);
+                if(result.Error!=null) return BadRequest(result.Error.Message); 
             }
 
             product.Photos.Remove(photo);
