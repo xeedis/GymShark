@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
+using GymSharkAPI.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace GymSharkApi.Helpers
                 opt=> opt.MapFrom(src=>src.Photos.FirstOrDefault(x=>x.isMain).Url));
             CreateMap<Photo, PhotoDto>();
             CreateMap<ItemUpdateDto, Product>();
+            CreateMap<RegisterDto, AppUser>();
         }
     }
 }
