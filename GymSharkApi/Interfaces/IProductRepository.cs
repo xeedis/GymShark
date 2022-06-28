@@ -1,5 +1,6 @@
 ﻿using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
+using GymSharkApi.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace GymSharkApi.Interfaces
         Task<Product> GetProductByIdAsync(int id);
         Task<Product> GetProductByName(string name);
         Task<ItemDto> GetItemAsync(string name);
-        Task<IEnumerable<ItemDto>> GetItemsAsync();
+        Task<PagedList<ItemDto>> GetItemsAsync(ProductsParams productsParams);
     }
 }

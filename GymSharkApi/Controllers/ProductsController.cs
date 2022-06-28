@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
+using GymSharkApi.Extensions;
+using GymSharkApi.Helpers;
 using GymSharkApi.Interfaces;
 using GymSharkApi.Services;
 using GymSharkAPI.Data;
@@ -28,9 +30,12 @@ namespace GymSharkApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ItemDto>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ItemDto>>> GetProducts([FromQuery]ProductsParams productParams)
         {
-            var products = await _productRepository.GetItemsAsync();
+            var products = await _productRepository.GetItemsAsync(productParams);
+
+            Response.AddPaginationHeader(products.CurrentPage, products.PageSize, products.TotalCount, products.TotalPages);
+
             return Ok(products);
         }
 

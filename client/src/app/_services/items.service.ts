@@ -1,9 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Item } from '../_models/item';
+import { PaginatedResult } from '../_models/pagination';
+import { ItemParams } from '../_models/itemsParams';
+import { AccountService } from './account.service';
+import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +15,55 @@ import { Item } from '../_models/item';
 export class ItemsService {
   baseUrl = environment.apiUrl;
   items: Item[] = [];
+  memberCache= new Map();
+  user: User;
+  itemParams: ItemParams;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private accountService:AccountService) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user=>{
+      this.user = user;
+      this.itemParams = new ItemParams();
+    })
+   }
 
-  getItems(){
-    if(this.items.length > 0) return of(this.items);
-    return this.http.get<Item[]>(this.baseUrl + 'products').pipe(
-      map(items=>{
-        this.items = items;
-        return items;
-      })
-    );
+   getItemParams(){
+    return this.itemParams;
+   }
+
+   setItemParams(itemParams: ItemParams){
+    this.itemParams = itemParams;
+   }
+
+   resetItemParams(){
+    this.itemParams = new ItemParams();
+    return this.itemParams;
+   }
+
+  getItems(itemParams: ItemParams){
+    var response = this.memberCache.get(Object.values(itemParams).join('-'));
+    if(response){ 
+      return of(response);
+    }
+
+    let params = this.getPaginationHeaders(itemParams.pageNumber, itemParams.pageSize);
+    params = params.append('category', itemParams.category);
+    params = params.append('minPrice', itemParams.minPrice.toString());
+    params = params.append('maxPrice', itemParams.maxPrice.toString());
+
+
+    return this.getPaginatedResult<Item[]>(this.baseUrl + 'products',params)
+    .pipe(map(response => {
+      this.memberCache.set(Object.values(itemParams).join('-'), response)
+      return response;
+    }))
+  }
+
+  private getPaginationHeaders(pageNumber: number, pageSize: number){
+    let params = new HttpParams();
+
+    params = params.append('pageNumber', pageNumber.toString());
+    params = params.append('pageSize', pageSize.toString());
+    return params;
   }
 
   getItem(productName:string){
@@ -45,5 +87,19 @@ export class ItemsService {
 
   deletePhoto(productName:string, photoId:number){
     return this.http.delete(this.baseUrl + 'products/' + productName + '/delete-photo/' + photoId);
+  }
+
+  private getPaginatedResult<T>(url, params) {
+    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
+
+    return this.http.get<T>(url, { observe: 'response', params }).pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') !== null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          return paginatedResult;
+        }
+      })
+    );
   }
 }

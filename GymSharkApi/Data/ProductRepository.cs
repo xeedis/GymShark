@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
+using GymSharkApi.Helpers;
 using GymSharkApi.Interfaces;
 using GymSharkAPI.Data;
 using Microsoft.EntityFrameworkCore;
@@ -59,12 +60,17 @@ namespace GymSharkApi.Data
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<ItemDto>> GetItemsAsync()
+        public async Task<PagedList<ItemDto>> GetItemsAsync(ProductsParams productParams)
         {
-            return  await _context.Products
-                .ProjectTo<ItemDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
-                
+            var query = _context.Products.AsQueryable();
+            if(productParams.Category != "all")
+            {
+                query = query.Where(p => p.Category == productParams.Category);
+            }
+            query = query.Where(p => p.Price >= productParams.minPrice && p.Price <= productParams.maxPrice);
+
+            return await PagedList<ItemDto>.CreateAsync(query.ProjectTo<ItemDto>(_mapper.ConfigurationProvider)
+                .AsNoTracking(), productParams.PageNumber, productParams.PageSize);    
         }
     }
 }
