@@ -89,6 +89,14 @@ export class ItemsService {
     return this.http.delete(this.baseUrl + 'products/' + productName + '/delete-photo/' + photoId);
   }
 
+  addLike(productname:string){
+    return this.http.post(this.baseUrl +'orders/'+productname,{});
+  }
+
+  getLikes(predicate: string){
+    return this.http.get(this.baseUrl + 'orders?=' + predicate);
+  }
+
   private getPaginatedResult<T>(url, params) {
     const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
 

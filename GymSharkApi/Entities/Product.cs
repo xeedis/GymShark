@@ -14,5 +14,7 @@ namespace GymSharkApi.Entities
         public int Price { get; set; }
         public string Category { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<ProductOrder> OrderedByUsers { get; set; }
+        public ICollection<Messages> MessagesReceived { get; set; }
     }
 }

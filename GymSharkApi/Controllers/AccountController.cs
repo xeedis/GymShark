@@ -45,7 +45,7 @@ namespace GymSharkApi.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user),
+                Token =  _tokenService.CreateToken(user),
             };
         }
 
@@ -65,7 +65,7 @@ namespace GymSharkApi.Controllers
             return new UserDto
             {
                 Username=user.UserName,
-                Token=_tokenService.CreateToken(user)
+                Token= _tokenService.CreateToken(user)
             };
 
         }

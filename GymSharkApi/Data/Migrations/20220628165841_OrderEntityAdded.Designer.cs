@@ -3,14 +3,16 @@ using System;
 using GymSharkAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GymSharkAPI.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220628165841_OrderEntityAdded")]
+    partial class OrderEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,45 +36,6 @@ namespace GymSharkAPI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("GymSharkApi.Entities.Messages", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("MessageSent")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("RecipientDeleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("RecipientId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("RecipientName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("SenderDeleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("SenderId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SenderUsername")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipientId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("GymSharkApi.Entities.Photo", b =>
@@ -141,25 +104,6 @@ namespace GymSharkAPI.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("GymSharkApi.Entities.Messages", b =>
-                {
-                    b.HasOne("GymSharkApi.Entities.Product", "Recipient")
-                        .WithMany("MessagesReceived")
-                        .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("GymSharkAPI.Entities.AppUser", "Sender")
-                        .WithMany("MessagesSent")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Recipient");
-
-                    b.Navigation("Sender");
-                });
-
             modelBuilder.Entity("GymSharkApi.Entities.Photo", b =>
                 {
                     b.HasOne("GymSharkApi.Entities.Product", "Product")
@@ -192,15 +136,11 @@ namespace GymSharkAPI.Data.Migrations
 
             modelBuilder.Entity("GymSharkAPI.Entities.AppUser", b =>
                 {
-                    b.Navigation("MessagesSent");
-
                     b.Navigation("OrderedProducts");
                 });
 
             modelBuilder.Entity("GymSharkApi.Entities.Product", b =>
                 {
-                    b.Navigation("MessagesReceived");
-
                     b.Navigation("OrderedByUsers");
 
                     b.Navigation("Photos");

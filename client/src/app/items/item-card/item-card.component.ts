@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Item } from 'src/app/_models/item';
+import { ItemsService } from 'src/app/_services/items.service';
 
 @Component({
   selector: 'app-item-card',
@@ -8,9 +10,15 @@ import { Item } from 'src/app/_models/item';
 })
 export class ItemCardComponent implements OnInit {
   @Input() item: Item;
-  constructor() { }
+  constructor(private itemService:ItemsService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+  }
+
+  addLike(item: Item){
+    this.itemService.addLike(item.productName).subscribe(()=>{
+      this.toastr.success('You have ordered' + item.productName);
+    })
   }
 
 }
