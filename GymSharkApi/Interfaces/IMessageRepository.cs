@@ -13,7 +13,7 @@ namespace GymSharkApi.Interfaces
         void AddOpinion(Messages message);
         void DeleteOpinion(Messages message);
         Task<Messages> GetOpinion(int id);
-        Task<PagedList<MessageDto>> GetOpinionsForProduct();
+        Task<PagedList<MessageDto>> GetOpinionsForProduct(OpinionParams opinionParams);
         Task<IEnumerable<MessageDto>> GetOpinionThread(int currentUserId, int recipientId);
 
         Task<bool> SaveAllAsync();

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
+using GymSharkApi.Extensions;
+using GymSharkApi.Helpers;
 using GymSharkApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,14 +13,14 @@ using System.Threading.Tasks;
 
 namespace GymSharkApi.Controllers
 {
-    public class MessageController: BaseApiController
+    public class MessageController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public MessageController(IUserRepository userRepository,IProductRepository productRepository, 
+        public MessageController(IUserRepository userRepository, IProductRepository productRepository,
                 IMessageRepository messageRepository, IMapper mapper)
         {
             _userRepository = userRepository;
@@ -52,5 +54,17 @@ namespace GymSharkApi.Controllers
 
             return BadRequest("Could not send opinion");
         }
+
+        /*[HttpGet("{productName}")]
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetOpinionsForProduct([FromQuery] OpinionParams opinionParams)
+        {
+            opinionParams.Username = _productRepository.GetProductByName
+
+            var opinions = await _messageRepository.GetOpinionsForProduct(opinionParams);
+
+            Response.AddPaginationHeader(opinions.CurrentPage, opinions.PageSize, opinions.TotalCount, opinions.TotalPages);
+
+            return opinions;
+        }*/
     }
 }

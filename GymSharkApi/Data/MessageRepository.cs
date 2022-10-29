@@ -1,4 +1,6 @@
-﻿using GymSharkApi.DTOs;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
 using GymSharkApi.Helpers;
 using GymSharkApi.Interfaces;
@@ -13,9 +15,11 @@ namespace GymSharkApi.Data
     public class MessageRepository : IMessageRepository
     {
         private readonly DataContext _context;
-        public MessageRepository(DataContext context)
+        private readonly IMapper _mapper;
+        public MessageRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public void AddOpinion(Messages message)
         {
@@ -32,9 +36,14 @@ namespace GymSharkApi.Data
             return await _context.Messages.FindAsync(id);
         }
 
-        public Task<PagedList<MessageDto>> GetOpinionsForProduct()
+        public async Task<PagedList<MessageDto>> GetOpinionsForProduct(OpinionParams opinionParams)
         {
-            throw new NotImplementedException();
+            var query = _context.Messages
+                .OrderByDescending(m => m.MessageSent)
+                .AsQueryable();
+            var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
+
+            return await PagedList<MessageDto>.CreateAsync(messages, opinionParams.PageNumber, opinionParams.PageSize);
         }
 
         public Task<IEnumerable<MessageDto>> GetOpinionThread(int currentUserId, int recipientId)
