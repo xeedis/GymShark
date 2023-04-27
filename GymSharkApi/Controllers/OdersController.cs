@@ -1,6 +1,7 @@
 ﻿using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
 using GymSharkApi.Extensions;
+using GymSharkApi.Helpers;
 using GymSharkApi.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace GymSharkApi.Controllers
         [HttpPost("{productname}")]
         public async Task<ActionResult> AddOrder(string productname)
         {
-            var sourceUserName = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var sourceUserName = User.FindFirst(ClaimTypes.Name).Value;
             var user = await _userRepository.GetUserByUsername(sourceUserName);
             var sourceUserId = user.Id;
             var orderedProduct = await _productRepository.GetProductByName(productname);
@@ -55,10 +56,14 @@ namespace GymSharkApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderDto>>> GetUserOrders(string predicate)
+        public async Task<ActionResult<PagedList<OrderDto>>> GetUserOrders([FromQuery]OrderParams orderParams)
         {
-            var id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var products = await _orderRepository.GetUserOrders(predicate, id);
+            orderParams.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var products = await _orderRepository.GetUserOrders(orderParams);
+
+            Response.AddPaginationHeader(products.CurrentPage, products.PageSize,
+                    products.TotalCount, products.TotalPages);
             return Ok(products);
         }
     }

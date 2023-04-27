@@ -1,5 +1,6 @@
 ﻿using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
+using GymSharkApi.Helpers;
 using GymSharkApi.Interfaces;
 using GymSharkAPI.Data;
 using GymSharkAPI.Entities;
@@ -23,24 +24,26 @@ namespace GymSharkApi.Data
             return await _context.Orders.FindAsync(sourceUserId, orderedProductId);
         }
 
-        public async Task<IEnumerable<OrderDto>> GetUserOrders(string predicate, int userId)
+        public async Task<PagedList<OrderDto>> GetUserOrders(OrderParams orderParams)
         {
             var products = _context.Products.OrderBy(p => p.ProductName).AsQueryable();
             var orders = _context.Orders.AsQueryable();
 
-            if(predicate == "ordered")
+            if(orderParams.Predicate == "liked")
             {
-                orders = orders.Where(order => order.SourceUsertId == userId);
+                orders = orders.Where(order => order.SourceUsertId == orderParams.UserId);
                 products = orders.Select(order => order.OrderedProduct);
             }
 
-            return await products.Select(product => new OrderDto
+            var orderedItems =  products.Select(product => new OrderDto
             {
                 ProductName = product.ProductName,
                 Price = product.Price,
                 PhotoUrl = product.Photos.FirstOrDefault(p=>p.isMain).Url,
                 Id = product.Id
-            }).ToListAsync();
+            });
+
+            return await PagedList<OrderDto>.CreateAsync(orderedItems, orderParams.PageNumber, orderParams.PageSize); 
         }
 
         public async Task<AppUser> GetUserWithOrders(int userId)

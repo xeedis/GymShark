@@ -8,6 +8,8 @@ namespace GymSharkApi.DTOs
     public class ItemUpdateDto
     {
         public string Description { get; set; }
+        public string AboutCompany { get; set; }
+        public string SpecifiedFor { get; set; }
         public int Price { get; set; }
         public string Category { get; set; }
     }

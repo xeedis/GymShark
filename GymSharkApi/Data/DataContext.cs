@@ -16,7 +16,7 @@ namespace GymSharkAPI.Data
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductOrder> Orders { get; set; }
-        public DbSet<Messages> Messages { get; set; }
+        public DbSet<Opinion> Messages { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -36,12 +36,12 @@ namespace GymSharkAPI.Data
                 .HasForeignKey(s => s.OrderedProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Messages>()
+            builder.Entity<Opinion>()
                 .HasOne(p => p.Recipient)
                 .WithMany(m => m.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Messages>()
+            builder.Entity<Opinion>()
                 .HasOne(s => s.Sender)
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);

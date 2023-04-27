@@ -13,15 +13,15 @@ using System.Threading.Tasks;
 
 namespace GymSharkApi.Controllers
 {
-    public class MessageController : BaseApiController
+    public class OpinionController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
-        private readonly IMessageRepository _messageRepository;
+        private readonly IOpinionRepository _messageRepository;
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public MessageController(IUserRepository userRepository, IProductRepository productRepository,
-                IMessageRepository messageRepository, IMapper mapper)
+        public OpinionController(IUserRepository userRepository, IProductRepository productRepository,
+                IOpinionRepository messageRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _productRepository = productRepository;
@@ -30,7 +30,7 @@ namespace GymSharkApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<MessageDto>> CreateOpinion(CreateMessageDto createMessageDto)
+        public async Task<ActionResult<OpinionDto>> CreateOpinion(CreateMessageDto createMessageDto)
         {
             var username = User.FindFirst(ClaimTypes.Name)?.Value;
 
@@ -39,7 +39,7 @@ namespace GymSharkApi.Controllers
 
             if (recipient == null) return NotFound();
 
-            var message = new Messages
+            var message = new Opinion
             {
                 Sender = sender,
                 Recipient = recipient,
@@ -50,21 +50,20 @@ namespace GymSharkApi.Controllers
 
             _messageRepository.AddOpinion(message);
 
-            if (await _messageRepository.SaveAllAsync()) return Ok(_mapper.Map<MessageDto>(message));
+            if (await _messageRepository.SaveAllAsync()) return Ok(_mapper.Map<OpinionDto>(message));
 
             return BadRequest("Could not send opinion");
         }
 
-        /*[HttpGet("{productName}")]
-        public async Task<ActionResult<IEnumerable<MessageDto>>> GetOpinionsForProduct([FromQuery] OpinionParams opinionParams)
+        [HttpGet("{productName}")]
+        public async Task<ActionResult<IEnumerable<OpinionDto>>> GetOpinionsForProduct([FromQuery] OpinionParams opinionParams, string productName)
         {
-            opinionParams.Username = _productRepository.GetProductByName
-
+            opinionParams.ProductName = productName;
             var opinions = await _messageRepository.GetOpinionsForProduct(opinionParams);
 
             Response.AddPaginationHeader(opinions.CurrentPage, opinions.PageSize, opinions.TotalCount, opinions.TotalPages);
 
             return opinions;
-        }*/
+        }
     }
 }

@@ -13,7 +13,6 @@ import { RegisterComponent } from './register/register.component';
 import { ItemListComponent } from './items/item-list/item-list.component';
 import { ItemDetailComponent } from './items/item-detail/item-detail.component';
 import { ListsComponent } from './items/lists/lists.component';
-import { CommentsComponent } from './items/comments/comments.component'
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './_modules/shared.module';
 import { ItemCardComponent } from './items/item-card/item-card.component';
@@ -23,6 +22,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './items/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { OpinionsComponent } from './opinions/opinions/opinions.component';
+import { PaymentComponent } from './payment/payment/payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,11 +33,12 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
     ItemListComponent,
     ItemDetailComponent,
     ListsComponent,
-    CommentsComponent,
     ItemCardComponent,
     ItemEditComponent,
     PhotoEditorComponent,
     TextInputComponent,
+    OpinionsComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

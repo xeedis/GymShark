@@ -11,7 +11,7 @@ namespace GymSharkAPI.Entities
         public int Id { get; set; }
         public string UserName { get; set; }
         public ICollection<ProductOrder> OrderedProducts { get; set; }
-        public ICollection<Messages> MessagesSent { get; set; }
+        public ICollection<Opinion> MessagesSent { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
     }

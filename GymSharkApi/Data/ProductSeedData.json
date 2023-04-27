@@ -1,120 +1,60 @@
 ﻿[
   {
-    "ProductName": "nostrud",
-    "Description": "Ea eu adipisicing Lorem id do deserunt dolore nisi proident. Deserunt deserunt aliquip magna dolore aute Lorem anim esse do ullamco do. Aliqua eiusmod magna magna amet ex in pariatur est amet duis nulla qui est ipsum. Tempor deserunt incididunt aliqua anim incididunt ipsum non deserunt voluptate Lorem commodo minim nulla sunt.\r\n",
-    "Price": 87,
-    "Category": "supplement",
-    "Photos": [
-      {
-        "Url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJnc3Fk7N025AVMEIO8-zcK2LunsSu3AN81EOM-VOXWroKaKj1uryO3eJOFabo712Pqps&usqp=CAU",
-        "IsMain": true
-      }
-    ]
-  },
-  {
-    "ProductName": "consectetur",
-    "Description": "Tempor laboris elit ad ipsum fugiat Lorem anim incididunt do eu culpa ex. Elit nostrud adipisicing nostrud consectetur incididunt officia et aute veniam id magna veniam qui labore. Aliquip occaecat culpa cillum pariatur. Ea esse quis adipisicing cupidatat aute et dolor. Dolor ex laborum est minim incididunt Lorem eiusmod irure quis.\r\n",
-    "Price": 295,
-    "Category": "tool",
-    "Photos": [
-      {
-        "Url": "https://picsum.photos/images1091.jpg",
-        "IsMain": true
-      }
-    ]
-  },
-  {
-    "ProductName": "Lorem",
-    "Description": "Ipsum officia officia consectetur adipisicing culpa mollit dolore non qui amet anim. Et reprehenderit qui ad velit consectetur magna esse anim veniam elit. Ipsum veniam sint culpa quis et minim incididunt consequat deserunt eiusmod exercitation.\r\n",
-    "Price": 259,
-    "Category": "tool",
-    "Photos": [
-      {
-        "Url": "https://picsum.photos/images1036.jpg",
-        "IsMain": true
-      }
-    ]
-  },
-  {
-    "ProductName": "voluptate",
-    "Description": "Esse commodo ipsum Lorem deserunt nulla esse irure mollit. Cillum culpa nostrud aute officia ipsum cillum est. Sit id sunt officia qui.\r\n",
-    "Price": 27,
-    "Category": "tool",
-    "Photos": [
-      {
-        "Url": "https://picsum.photos/images1043.jpg",
-        "IsMain": true
-      }
-    ]
-  },
-  {
-    "ProductName": "consequat",
-    "Description": "Nostrud aliqua nostrud tempor fugiat id culpa veniam nulla excepteur officia culpa quis. Magna ea sit Lorem excepteur cupidatat amet veniam ut ipsum cillum dolor sunt. Et do aliquip ullamco ad do adipisicing adipisicing do qui commodo Lorem ullamco proident adipisicing.\r\n",
-    "Price": 219,
-    "Category": "supplement",
-    "Photos": [
-      {
-        "Url": "https://picsum.photos/images1081.jpg",
-        "IsMain": true
-      }
-    ]
-  },
-  {
-    "ProductName": "duis",
-    "Description": "Nisi consequat anim non voluptate adipisicing reprehenderit irure ex incididunt proident esse. Anim minim velit commodo aliquip sint ad quis sunt exercitation. Anim nulla aute anim ea eu cillum non occaecat voluptate laboris mollit cillum tempor sunt. In officia Lorem quis laborum dolor commodo incididunt sit.\r\n",
-    "Price": 27,
-    "Category": "tool",
-    "Photos": [
-      {
-        "Url": "https://picsum.photos/images1027.jpg",
-        "IsMain": true
-      }
-    ]
-  },
-  {
-    "ProductName": "anim",
-    "Description": "Officia fugiat sit mollit non ipsum laboris officia culpa. Est quis fugiat voluptate labore deserunt pariatur voluptate cupidatat id deserunt. Labore nostrud amet ad Lorem commodo. Tempor exercitation ad aute id magna amet minim duis velit ad excepteur minim. Fugiat laboris voluptate labore incididunt cupidatat. Lorem tempor labore laboris dolor pariatur laboris occaecat voluptate commodo reprehenderit fugiat ex exercitation sint. Minim aliqua qui incididunt dolore eiusmod Lorem ex.\r\n",
-    "Price": 42,
+    "ProductName": "id",
+    "Description": "Irure proident reprehenderit ullamco eiusmod fugiat. Lorem minim magna ullamco Lorem aliquip nisi id ullamco. Excepteur ea officia ut laboris adipisicing sunt reprehenderit cupidatat reprehenderit pariatur anim. Est officia eiusmod nulla labore proident est non nisi esse ex minim incididunt amet. Incididunt mollit labore reprehenderit anim ut. Ipsum laboris aliqua exercitation elit enim veniam. Et veniam proident pariatur officia incididunt ipsum dolor minim ut consectetur nostrud enim est.\r\n",
+    "Price": 457,
     "Category": "wear",
     "Photos": [
       {
-        "Url": "https://picsum.photos/images1012.jpg",
+        "Url": "https://picsum.photos/images35.jpg",
         "IsMain": true
       }
     ]
   },
   {
-    "ProductName": "nisi",
-    "Description": "Aliqua ullamco excepteur veniam deserunt ex. Et deserunt duis ullamco elit aute dolor mollit reprehenderit voluptate. Ullamco do amet fugiat et consectetur ea. Cupidatat occaecat pariatur mollit ipsum in proident deserunt.\r\n",
-    "Price": 212,
-    "Category": "tool",
+    "ProductName": "non",
+    "Description": "Excepteur in incididunt nostrud dolore elit cillum do eu ut elit mollit ex. Est nostrud eu laboris sit ullamco nisi irure amet exercitation tempor et ipsum. Culpa ut voluptate et laborum ipsum ut duis tempor officia exercitation consectetur velit culpa.\r\n",
+    "Price": 320,
+    "Category": "wear",
     "Photos": [
       {
-        "Url": "https://picsum.photos/images1017.jpg",
+        "Url": "https://picsum.photos/images1.jpg",
         "IsMain": true
       }
     ]
   },
   {
-    "ProductName": "consequat",
-    "Description": "Occaecat laboris et occaecat minim dolor minim non sint ut est. Veniam adipisicing quis ad nostrud eiusmod commodo consequat ullamco laborum ad aliquip. Aute dolor proident sunt non anim exercitation consequat id deserunt tempor.\r\n",
-    "Price": 115,
-    "Category": "supplement",
+    "ProductName": "irure",
+    "Description": "Officia aliqua velit exercitation ea reprehenderit ex nostrud non sunt. Ullamco incididunt anim veniam commodo pariatur dolore deserunt. Voluptate voluptate mollit pariatur qui dolore exercitation.\r\n",
+    "Price": 73,
+    "Category": "wear",
     "Photos": [
       {
-        "Url": "https://picsum.photos/images1001.jpg",
+        "Url": "https://picsum.photos/images2.jpg",
         "IsMain": true
       }
     ]
   },
   {
-    "ProductName": "cillum",
-    "Description": "Eu do id incididunt voluptate consectetur tempor ex reprehenderit sint aliqua occaecat veniam exercitation deserunt. Proident eu do cupidatat veniam ea adipisicing cillum esse occaecat ipsum est consequat. Aliqua est proident esse in magna elit ex deserunt cupidatat cupidatat. Aliqua quis sit irure sunt. Cupidatat aute culpa veniam et nostrud anim non sint consequat nulla ad nostrud.\r\n",
-    "Price": 189,
-    "Category": "supplement",
+    "ProductName": "ad",
+    "Description": "Eiusmod labore incididunt occaecat aute veniam dolor est amet enim tempor ad dolore. Lorem minim nisi duis in minim veniam aliquip officia pariatur amet occaecat dolor. Reprehenderit in enim dolore ex.\r\n",
+    "Price": 273,
+    "Category": "wear",
     "Photos": [
       {
-        "Url": "https://picsum.photos/images1041.jpg",
+        "Url": "https://picsum.photos/images87.jpg",
+        "IsMain": true
+      }
+    ]
+  },
+  {
+    "ProductName": "laborum",
+    "Description": "Officia consequat id non veniam magna nisi adipisicing consequat nulla do ex proident. Proident exercitation ea elit Lorem ex duis nisi fugiat amet sunt cupidatat. Pariatur cupidatat cupidatat esse eu tempor Lorem consectetur anim in tempor pariatur exercitation sunt nostrud. Eiusmod commodo eu ullamco laborum enim deserunt labore eu laboris mollit pariatur aliqua ad velit. Aute dolor nostrud nisi excepteur sit sit qui voluptate cillum qui non. Eu quis consequat amet ea ad laborum nisi aute. Veniam proident anim fugiat exercitation adipisicing culpa ex.\r\n",
+    "Price": 486,
+    "Category": "wear",
+    "Photos": [
+      {
+        "Url": "https://picsum.photos/images17.jpg",
         "IsMain": true
       }
     ]

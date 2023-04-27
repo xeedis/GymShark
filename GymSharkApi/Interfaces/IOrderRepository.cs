@@ -1,5 +1,6 @@
 ﻿using GymSharkApi.DTOs;
 using GymSharkApi.Entities;
+using GymSharkApi.Helpers;
 using GymSharkAPI.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,6 @@ namespace GymSharkApi.Interfaces
     {
         Task<ProductOrder> GetProductOrder(int sourceUserId, int orderedProductId);
         Task<AppUser> GetUserWithOrders(int productId);
-        Task<IEnumerable<OrderDto>> GetUserOrders(string predicate, int productId);
+        Task<PagedList<OrderDto>> GetUserOrders(OrderParams orderParams);
     }
 }

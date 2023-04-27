@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <div class="checkout container col-4 float-left">
+            <div *ngFor="let item of items" class="card">
+                <div class="card-body">
+                    <img src="{{item.photoUrl}}" alt="{{item.productName}}" class="img-fluid float-right" style="width: 100px; height: 100px;">
+                    <h5 class="card-title" name="Title" asp-for="@Model.Title">{{item.productName}}</h5>
+                    <p class="card-text">{{item.Description}}</p>
+                    <p class="card-text"><small class="text-muted">Author: {{item.category}}</small></p>
+                    <p class="card-text"><small class="text-muted">Price: {{item.price}}</small></p>
+                </div>
+            </div>
+            <hr />
+            <button class="btn btn-success" type="submit"><span>Confirm payment: {{totalCost}} $</span></button>
+    </div>
+    
+</div>

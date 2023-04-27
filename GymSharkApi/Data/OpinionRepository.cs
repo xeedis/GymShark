@@ -12,41 +12,42 @@ using System.Threading.Tasks;
 
 namespace GymSharkApi.Data
 {
-    public class MessageRepository : IMessageRepository
+    public class OpinionRepository : IOpinionRepository
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public MessageRepository(DataContext context, IMapper mapper)
+        public OpinionRepository(DataContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-        public void AddOpinion(Messages message)
+        public void AddOpinion(Opinion message)
         {
             _context.Messages.Add(message);
         }
 
-        public void DeleteOpinion(Messages message)
+        public void DeleteOpinion(Opinion message)
         {
             _context.Messages.Remove(message);
         }
 
-        public async Task<Messages> GetOpinion(int id)
+        public async Task<Opinion> GetOpinion(int id)
         {
             return await _context.Messages.FindAsync(id);
         }
 
-        public async Task<PagedList<MessageDto>> GetOpinionsForProduct(OpinionParams opinionParams)
+        public async Task<PagedList<OpinionDto>> GetOpinionsForProduct(OpinionParams opinionParams)
         {
             var query = _context.Messages
+                .Where(p => p.Recipient.ProductName == opinionParams.ProductName)
                 .OrderByDescending(m => m.MessageSent)
                 .AsQueryable();
-            var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
+            var messages = query.ProjectTo<OpinionDto>(_mapper.ConfigurationProvider);
 
-            return await PagedList<MessageDto>.CreateAsync(messages, opinionParams.PageNumber, opinionParams.PageSize);
+            return await PagedList<OpinionDto>.CreateAsync(messages, opinionParams.PageNumber, opinionParams.PageSize);
         }
 
-        public Task<IEnumerable<MessageDto>> GetOpinionThread(int currentUserId, int recipientId)
+        public Task<IEnumerable<OpinionDto>> GetOpinionThread(int currentUserId, int recipientId)
         {
             throw new NotImplementedException();
         }

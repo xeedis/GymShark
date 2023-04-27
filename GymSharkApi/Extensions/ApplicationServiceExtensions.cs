@@ -18,12 +18,14 @@ namespace GymSharkApi.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.Configure<BraintreeSettings>(config.GetSection("BraintreeSettings"));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IOpinionRepository, OpinionRepository>();
+            services.AddScoped<IBraintreeService, BraintreeService>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {

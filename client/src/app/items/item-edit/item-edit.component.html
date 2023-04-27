@@ -37,11 +37,11 @@
                     <h4>Description</h4>
                     <textarea class="form-control" [(ngModel)]="item.description" name="details" rows="6"></textarea>
                     <h4>About company</h4>
-                    <textarea class="form-control" [(ngModel)]="item.description" name="about company" rows="6"></textarea>
+                    <textarea class="form-control" [(ngModel)]="item.aboutCompany" name="about company" rows="6"></textarea>
                     <h4>Specified For</h4>
-                    <textarea class="form-control" [(ngModel)]="item.description" name="specified for" rows="6"></textarea>
+                    <textarea class="form-control" [(ngModel)]="item.specifiedFor" name="specified for" rows="6"></textarea>
                 </form>
-                            </tab>
+                </tab>
             <tab heading="Photos">
                 <app-photo-editor [item]="item"></app-photo-editor>
             </tab>

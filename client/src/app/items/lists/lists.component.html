@@ -1,1 +1,31 @@
-<p>lists works!</p>
+<div class="text-center mt-3">
+    <h2>{{predicate === 'liked' ? "Products you ordered" : ""}}</h2>
+</div>
+
+<div class="container mt-3">
+    <div class="row mt-3">
+        <div class="col-2" *ngFor="let item of items">
+            <app-item-card [item]="item"></app-item-card>
+        </div>
+    </div>
+
+    <h4 class="col-4"> Total cost:{{totalCost}}</h4>
+
+    <div class="col-2 content-right">
+        <a class="btn btn-primary" href="/payment" routerLinkActive="active" [(ngModel)]="items">Go to payment</a>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination 
+        [boundaryLinks]="true" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;">
+    </pagination>
+</div>

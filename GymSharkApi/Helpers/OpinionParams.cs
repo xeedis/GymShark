@@ -7,7 +7,6 @@ namespace GymSharkApi.Helpers
 {
     public class OpinionParams: PaginationParams
     {
-        public string Username { get; set; }
-        public string Container { get; set; } = "Unread";
+        public string ProductName { get; set; }
     }
 }

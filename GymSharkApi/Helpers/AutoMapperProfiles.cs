@@ -19,7 +19,7 @@ namespace GymSharkApi.Helpers
             CreateMap<Photo, PhotoDto>();
             CreateMap<ItemUpdateDto, Product>();
             CreateMap<RegisterDto, AppUser>();
-            CreateMap<Messages, MessageDto>();
+            CreateMap<Opinion, OpinionDto>();
         }
     }
 }

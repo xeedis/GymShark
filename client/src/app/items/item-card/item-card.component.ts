@@ -17,7 +17,7 @@ export class ItemCardComponent implements OnInit {
 
   addLike(item: Item){
     this.itemService.addLike(item.productName).subscribe(()=>{
-      this.toastr.success('You have ordered' + item.productName);
+      this.toastr.success('You have ordered ' + item.productName);
     })
   }
 

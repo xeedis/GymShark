@@ -1,25 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Item } from 'src/app/_models/item';
 import { Pagination } from 'src/app/_models/pagination';
+import { purharseModel } from 'src/app/_models/purharseModel';
 import { ItemsService } from 'src/app/_services/items.service';
+import { PaymentService } from 'src/app/_services/payment.service';
 
 @Component({
-  selector: 'app-lists',
-  templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.css']
+  selector: 'app-payment',
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.css']
 })
-export class ListsComponent implements OnInit {
+export class PaymentComponent implements OnInit {
   items: Item[] | undefined;
+  purharseModel: purharseModel;
   predicate = 'liked';
   pageNumber = 1;
   pageSize = 5;
   pagination: Pagination | undefined;
   totalCost = 0;
-
-  constructor(private itemService: ItemsService) { }
+  constructor(private itemService:ItemsService, private paymentService:PaymentService) { }
 
   ngOnInit(): void {
-    this.loadOrders();
+    this.loadOrders()
+    console.log(this.items);
   }
 
   loadOrders()
@@ -32,13 +35,8 @@ export class ListsComponent implements OnInit {
       }
     })  
   }
-   
-  pageChanged(event: any){
-    if(this.pageNumber !== event.page)
-    {
-      this.pageNumber = event.page;
-      this.loadOrders();
-    }
-  }
 
+  purharseItems(){
+    
+  }
 }

@@ -25,7 +25,7 @@ namespace GymSharkAPI
             try
             {
                 var context = services.GetRequiredService<DataContext>();
-                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                //var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 await context.Database.MigrateAsync();
                 await Seed.SeedProduct(context);
                 await Seed.SeedUsers(context);
